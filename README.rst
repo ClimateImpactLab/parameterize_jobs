@@ -35,7 +35,7 @@ Features
 TODOs
 -----
 
-View and submit issues on the [issues page](https://github.com/delgadom/parameterize_jobs/issues).
+View and submit issues on the `issues page <https://github.com/delgadom/parameterize_jobs/issues>`_.
 
 Quickstart
 ----------
@@ -192,7 +192,7 @@ Anything can be inside a ``ComponentSet`` iterable, including data, functions, o
 
     >>> _ = list(map(process_data, transforms * fps * years))
 
-This works seamlessly with dask's [`client.map`]() to provide intuitive job parameterization:
+This works seamlessly with dask's `client.map <http://distributed.dask.org/en/latest/api.html#distributed.Client.map>`_ to provide intuitive job parameterization:
 
 .. code-block:: python
 
