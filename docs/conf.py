@@ -47,7 +47,8 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
-    'IPython.sphinxext.ipython_console_highlighting']
+    'IPython.sphinxext.ipython_console_highlighting',
+    'IPython.sphinxext.ipython_directive']
 
 extlinks = {
     'issue': ('https://github.com/delgadom/parameterize_jobs/issues/%s', 'GH #'),
