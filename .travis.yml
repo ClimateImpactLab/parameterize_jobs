@@ -50,6 +50,7 @@ install:
 script:
 - if [[ "$TEST_ENV" == "conda" ]]; then
     if [[ "$TRAVIS_PYTHON_VERSION" != "2.7" ]]; then
+        pip install ipython &&
         pytest && sphinx-apidoc -o docs parameterize_jobs
   && sphinx-build -W -b html -d docs/_build/doctrees docs/. docs/_build/html;
     fi;
