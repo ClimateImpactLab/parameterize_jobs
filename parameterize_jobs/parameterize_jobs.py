@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
+from __future__ import absolute_import
 
 import itertools
 import functools
 from collections import OrderedDict
 
-
-def _product(arr):
-    return functools.reduce(lambda x, y: x * y, arr, 1)
-
-
-def _cumprod(arr):
-    return [_product(arr[i:]) for i in range(len(arr))]
+import parameterize_jobs._compat as _compat
+from parameterize_jobs._utils import _product, _cumprod
 
 
 class Component(object):
@@ -29,13 +24,8 @@ class Component(object):
         return len(self._values)
 
     def __iter__(self):
-        if (hasattr(self._values, 'shape') and len(self._values.shape) == 0):
-            yield self._values.item()
-        elif not hasattr(self._values, '__iter__'):
-            yield self._values
-        else:
-            for v in self._values:
-                yield v
+        for v in self._values:
+            yield v
 
     def __repr__(self):
         return '<{} [{}]>'.format(
@@ -46,7 +36,7 @@ class Component(object):
 
 class ComponentSet(object):
     '''
-    Index-albe combinatorial product job specification
+    Indexable combinatorial product job specification
     '''
 
     def __init__(self, **kwargs):
@@ -61,6 +51,12 @@ class ComponentSet(object):
             raise NotImplemented('slice indexing not yet supported')
 
         elif isinstance(idx, int):
+
+            if (idx >= len(self)) or (idx < -1 * len(self)):
+                raise KeyError(
+                    'index {} out of bounds for {} with length {}'
+                    .format(idx, self.__class__.__name__, len(self)))
+
             lens = list(map(len, self._sets.values()))
             cplens = list(_cumprod(list(
                 list(lens[1:]) + [1])))
@@ -86,7 +82,9 @@ class ComponentSet(object):
 
     def __mul__(self, other):
         if isinstance(other, ComponentSet):
-            return ComponentSet(**self._sets, **other._sets)
+            return ComponentSet(
+                **_compat.merge_dicts(self._sets, other._sets))
+
         elif isinstance(other, MultiComponentSet):
             return MultiComponentSet([self * c for c in other._components])
         else:
@@ -203,7 +201,7 @@ def expand_kwargs(func):
     Examples
     --------
     .. code-block:: python
-        >>> @expand
+        >>> @expand_kwargs
         ... def my_func(a, b, exp=1):
         ...     return (a * b)**exp
         ...
@@ -216,5 +214,6 @@ def expand_kwargs(func):
 
     @functools.wraps(func)
     def inner(k, *args, **kwargs):
-        return func(*args, **k, **kwargs)
+        kw = _compat.merge_dicts(k, kwargs)
+        return func(*args, **kw)
     return inner
