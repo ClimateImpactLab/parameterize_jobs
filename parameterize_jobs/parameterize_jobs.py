@@ -201,6 +201,7 @@ def expand_kwargs(func):
     Examples
     --------
     .. code-block:: python
+
         >>> @expand_kwargs
         ... def my_func(a, b, exp=1):
         ...     return (a * b)**exp
