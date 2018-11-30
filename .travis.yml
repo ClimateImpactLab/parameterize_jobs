@@ -1,13 +1,25 @@
+
 language: python
-python:
-- 3.6
-- 3.7
-- 2.7
 
 env:
-  matrix:
   - TEST_ENV=tox
+    INSTALL_NUMPY=false
   - TEST_ENV=conda
+    INSTALL_NUMPY=false
+  - TEST_ENV=conda
+    INSTALL_NUMPY=true
+
+matrix:
+  include:
+    - python: 2.7
+      dist: trusty
+      sudo: no
+    - python: 3.6
+      dist: trusty
+      sudo: no
+    - python: 3.7
+      dist: xenial
+      sudo: yes
 
 install:
 - pip install --upgrade pip
@@ -27,7 +39,10 @@ install:
     && source activate test_env
     && python setup.py install
     && python -m pip install -r requirements_dev.txt
-    && conda install --yes --file requirements_conda.txt;
+    && conda install --yes --file requirements_conda.txt
+    && if [[ "$INSTALL_NUMPY" == "true"]]; then
+      conda install --yes numpy;
+      fi
   else
     pip install -U tox-travis;
   fi
@@ -59,6 +74,6 @@ deploy:
       WXBlZWhuYitJaHdoemNUMER3Sm9OTVBabFVQTVN1ZXRFcE5RR21PT3VRM2RlbGVUMnBPZlVRV1Ey
       ZjQzVVpYQWlYRjlEbm02ZjV2Sk8vTjhEZ3B5dHFCYUtudEdRd0lDc2xMZ2VSZDRXd0EyY0FVUlE9
   true:
-    branch: master
-    python: 2.7
+    on: tags
+    python: 3.6
     repo: delgadom/parameterize_jobs
