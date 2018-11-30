@@ -32,7 +32,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Michael Delgado",
     author_email='delgado.michaelt@gmail.com',
-    url='https://github.com/delgadom/parameterize_jobs',
+    url='https://pypi.org',
     packages=find_packages(include=['parameterize_jobs']),
     include_package_data=True,
     install_requires=requirements,
