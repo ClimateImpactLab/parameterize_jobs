@@ -40,8 +40,8 @@ install:
     && python setup.py install
     && python -m pip install -r requirements_dev.txt
     && conda install --yes --file requirements_conda.txt
-    && if [[ "$INSTALL_NUMPY" == "true"]]; then
-      conda install --yes numpy;
+    && if [[ "$INSTALL_NUMPY" == "true" ]]; then
+        conda install --yes numpy;
       fi
   else
     pip install -U tox-travis;
