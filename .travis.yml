@@ -59,6 +59,7 @@ deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: delgadom
+  repo: delgadom/parameterize_jobs
   password:
     secure: !!binary |
       VFFjS2VINUg2M2lrOThFQjMrOGRadG9pdVNNc3N2VzF5NDNGeVIyb1Y5aFI4UnN3K3Fna1lkbkpG
@@ -73,7 +74,6 @@ deploy:
       cGxwWmllRENqbjNEaUJIZStuK1RtVFZtcUM2NFdyOGdpUUdyK0dCOFFxMmZTMzkwK2RPSmk1bkJK
       WXBlZWhuYitJaHdoemNUMER3Sm9OTVBabFVQTVN1ZXRFcE5RR21PT3VRM2RlbGVUMnBPZlVRV1Ey
       ZjQzVVpYQWlYRjlEbm02ZjV2Sk8vTjhEZ3B5dHFCYUtudEdRd0lDc2xMZ2VSZDRXd0EyY0FVUlE9
-  true:
-    on: tags
+  on:
+    tags: true
     python: 3.6
-    repo: delgadom/parameterize_jobs
