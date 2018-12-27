@@ -5,15 +5,15 @@ Parameterize Jobs
 .. image:: https://img.shields.io/pypi/v/parameterize_jobs.svg
         :target: https://pypi.python.org/pypi/parameterize_jobs
 
-.. image:: https://img.shields.io/travis/delgadom/parameterize_jobs.svg
-        :target: https://travis-ci.org/delgadom/parameterize_jobs
+.. image:: https://img.shields.io/travis/ClimateImpactLab/parameterize_jobs.svg
+        :target: https://travis-ci.org/ClimateImpactLab/parameterize_jobs
 
 .. image:: https://readthedocs.org/projects/parameterize-jobs/badge/?version=latest
         :target: https://parameterize-jobs.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/delgadom/parameterize_jobs/shield.svg
-     :target: https://pyup.io/repos/github/delgadom/parameterize_jobs/
+.. image:: https://pyup.io/repos/github/ClimateImpactLab/parameterize_jobs/shield.svg
+     :target: https://pyup.io/repos/github/ClimateImpactLab/parameterize_jobs/
      :alt: Updates
 
 ``parameterize_jobs`` is a lightweight, pure-python toolkit for concisely and clearly creating large, parameterized, mapped job specifications.
@@ -35,7 +35,7 @@ Features
 TODOs
 -----
 
-View and submit issues on the `issues page <https://github.com/delgadom/parameterize_jobs/issues>`_.
+View and submit issues on the `issues page <https://github.com/ClimateImpactLab/parameterize_jobs/issues>`_.
 
 Quickstart
 ----------

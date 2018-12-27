@@ -51,8 +51,8 @@ extensions = [
     'IPython.sphinxext.ipython_directive']
 
 extlinks = {
-    'issue': ('https://github.com/delgadom/parameterize_jobs/issues/%s', 'GH #'),
-    'pull': ('https://github.com/delgadom/parameterize_jobs/pull/%s', 'PR #')}
+    'issue': ('https://github.com/ClimateImpactLab/parameterize_jobs/issues/%s', 'GH #'),
+    'pull': ('https://github.com/ClimateImpactLab/parameterize_jobs/pull/%s', 'PR #')}
 
 napoleon_numpy_docstring = True
 
@@ -70,7 +70,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Parameterize Jobs'
-copyright = u"2018, delgadom"
+copyright = u"2018, ClimateImpactLab"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -225,7 +225,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'parameterize_jobs.tex',
      u'Parameterize Jobs Documentation',
-     u'delgadom', 'manual'),
+     u'ClimateImpactLab', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -256,7 +256,7 @@ latex_documents = [
 man_pages = [
     ('index', 'parameterize_jobs',
      u'Parameterize Jobs Documentation',
-     [u'delgadom'], 1)
+     [u'ClimateImpactLab'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -271,7 +271,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'parameterize_jobs',
      u'Parameterize Jobs Documentation',
-     u'delgadom',
+     u'ClimateImpactLab',
      'parameterize_jobs',
      'One line description of project.',
      'Miscellaneous'),
