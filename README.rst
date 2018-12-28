@@ -127,10 +127,10 @@ These parameterized job specifications can be used in mappable jobs. The helper 
 .. code-block:: python
 
     >>> @pjs.expand_kwargs
-    ... def multiply(a, b):
-    ...     return a * b
+    ... def my_simple_func(a, b, c=1):
+    ...     return a * b * c
 
-    >>> list(map(multiply, a*b))
+    >>> list(map(my_simple_func, a*b))
     [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 0, 2, 4, 6, 8, 0, 3, 6, 9, 12]
 
 Jobs do not have to be the combinatorial product of all components:
@@ -140,7 +140,7 @@ Jobs do not have to be the combinatorial product of all components:
     >>> ab1 = pjs.ComponentSet(a=[0, 1], b=[0, 1])
     >>> ab2 = pjs.ComponentSet(a=[10, 11], b=[-1, 1])
 
-    >>> list(map(multiply, ab1 + ab2))
+    >>> list(map(my_simple_func, ab1 + ab2))
     [0, 0, 0, 1, -10, -11, 10, 11]
 
 A ``Constant`` object is simply a ``ComponentSet`` object defined with single values passed as keyword arguments rather than iterables passed as keyword arguments:
@@ -149,7 +149,7 @@ A ``Constant`` object is simply a ``ComponentSet`` object defined with single va
 
     >>> c = pjs.Constant(c=5)
 
-    >>> list(map(multiply, (ab1 + ab2) * c))
+    >>> list(map(my_simple_func, (ab1 + ab2) * c))
     [0, 0, 0, 5, -50, -55, 50, 55]
 
 Arbitrarily complex combinations of ComponentSets can be created:
@@ -159,7 +159,7 @@ Arbitrarily complex combinations of ComponentSets can be created:
     >>> c1 = pjs.Constant(c=1)
     >>> c2 = pjs.Constant(c=2)
 
-    >>> list(map(multiply, (ab1 + ab2) * c1 + (ab1 + ab2) * c2))
+    >>> list(map(my_simple_func, (ab1 + ab2) * c1 + (ab1 + ab2) * c2))
     [0, 0, 0, 1, -10, -11, 10, 11, 0, 0, 0, 2, -20, -22, 20, 22]
 
 Anything can be inside a ``ComponentSet`` iterable, including data, functions, or other objects:
@@ -198,5 +198,5 @@ This works seamlessly with dask's `client.map <http://distributed.dask.org/en/la
 
     >>> import dask.distributed as dd
     >>> client = dd.LocalClient()
-    >>> futures = client.map(multiply, (ab1 + ab2) * c1 + (ab1 + ab2) * c2)
+    >>> futures = client.map(my_simple_func, (ab1 + ab2) * c1 + (ab1 + ab2) * c2)
     >>> dd.progress(futures)
