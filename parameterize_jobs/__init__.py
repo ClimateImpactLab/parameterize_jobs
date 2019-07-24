@@ -9,6 +9,7 @@ from parameterize_jobs.parameterize_jobs import (
     ComponentSet,
     MultiComponentSet,
     Constant,
+    ParallelSequenceSet,
     expand_kwargs)
 
 __author__ = """Michael Delgado"""
@@ -20,6 +21,7 @@ _module_imports = (
     ComponentSet,
     MultiComponentSet,
     Constant,
+    ParallelSequenceSet,
     expand_kwargs
 )
 
