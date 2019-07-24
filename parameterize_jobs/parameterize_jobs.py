@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import itertools
 import functools
-from collections import OrderedDict, Sequence
+from collections import OrderedDict
 
 import parameterize_jobs._compat as _compat
 from parameterize_jobs._utils import _product, _cumprod
@@ -186,19 +186,20 @@ class Constant(ComponentSet):
 
 class ParallelComponentSet(MultiComponentSet):
     '''
-    A MultiComponentSet object created by multiple lists of 
+    A MultiComponentSet object created by multiple lists of
     the same length, where each job will take the nth element
     of each list
     '''
     def __init__(self, **kwargs):
         lengths = [len(v) for v in kwargs.values()]
-        if len(set(lengths))!=1:
+        if len(set(lengths)) != 1:
             raise ValueError('Passed values are not lists of equal length.')
         param_length = lengths[0]
-        
-        self._components = [Constant(**{k: v[vx] for k,v in kwargs.items()}) for vx in range(param_length)]
-        
-        
+
+        self._components = [Constant(**{k: v[vx] for k, v in kwargs.items()})
+                            for vx in range(param_length)]
+
+
 def expand_kwargs(func):
     '''
     Decorator to expand an kwargs in function calls

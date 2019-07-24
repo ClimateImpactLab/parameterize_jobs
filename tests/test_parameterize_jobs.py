@@ -63,17 +63,19 @@ def sample_py_nd_componentset():
             range10=range(10)),
         (10, 10))
 
+
 @pytest.fixture
 def sample_py_parallelcomponentset():
     '''
-    get a (ParallelComponentSet, shape) tuple 
+    get a (ParallelComponentSet, shape) tuple
     for a ComponentSet with multiple builtins
     '''
     return (
         pj.ParallelComponentSet(
-            pcs1=range(0,10),
-            pcs2=range(20,30)),
+            pcs1=range(0, 10),
+            pcs2=range(20, 30)),
         (10, ))
+
 
 @pytest.fixture
 def sample_numpy_componentset():
@@ -107,6 +109,7 @@ def sample_numpy_nd_componentset():
             sin=np.sin(np.linspace(0, 2*np.pi, 100))),
         (10, 10, 100))
 
+
 @pytest.fixture
 def sample_numpy_parallelcomponentset():
     '''
@@ -115,8 +118,8 @@ def sample_numpy_parallelcomponentset():
     '''
     return (
         pj.ParallelComponentSet(
-            pcs1=np.arange(0,10),
-            pcs2=np.arange(20,30)),
+            pcs1=np.arange(0, 10),
+            pcs2=np.arange(20, 30)),
         (10, ))
 
 
@@ -217,7 +220,8 @@ def test_complex_componentsets(
 
     cplx = ((cs1 + cs2) * cons1 + cons2 * (cs1 + cs2)) * pcs
 
-    assert len(cplx) == 2 * (_product(shape1) + _product(shape2)) * _product(shape3)
+    assert len(cplx) == 2 * (_product(shape1) +
+                             _product(shape2)) * _product(shape3)
 
     assert cplx[1] == merge_dicts(cs1[1], cons1[0], pcs[0])
     assert cplx[len(cs1) + 1] == merge_dicts(cs1[1], cons1[0], pcs[1])
@@ -231,15 +235,18 @@ def test_complex_componentsets(
 def test_numpy_componentset(sample_numpy_componentset):
     test_componentset(sample_numpy_componentset)
 
+
 @requires_numpy
 def test_numpy_ndcomponentset(sample_numpy_nd_componentset):
     test_ndcomponentset(sample_numpy_nd_componentset)
+
 
 @requires_numpy
 def test_numpy_multiple_componentsets(
         sample_numpy_componentset, another_numpy_componentset):
     test_multiple_componentsets(
         sample_numpy_componentset, another_numpy_componentset)
+
 
 @requires_numpy
 def test_numpy_complex_componentsets(
