@@ -184,7 +184,7 @@ class Constant(ComponentSet):
             (k, Component([v])) for k, v in kwargs.items()])
 
 
-class ParallelSequenceSet(MultiComponentSet):
+class ParallelComponentSet(MultiComponentSet):
     '''
     A MultiComponentSet object created by multiple lists of 
     the same length, where each job will take the nth element
