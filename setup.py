@@ -25,7 +25,7 @@ test_requirements = [
 
 setup(
     name='parameterize_jobs',
-    version='0.1.0',
+    version='0.1.1',
     description=(
         "concisely and clearly create large, "
         "parameterized, mapped job specifications"),
