@@ -65,6 +65,19 @@ def sample_py_nd_componentset():
 
 
 @pytest.fixture
+def sample_py_parallelcomponentset():
+    '''
+    get a (ParallelComponentSet, shape) tuple
+    for a ComponentSet with multiple builtins
+    '''
+    return (
+        pj.ParallelComponentSet(
+            pcs1=range(0, 10),
+            pcs2=range(20, 30)),
+        (10, ))
+
+
+@pytest.fixture
 def sample_numpy_componentset():
     '''
     get a (ComponentSet, shape) tuple for a ComponentSet with numpy values
@@ -95,6 +108,19 @@ def sample_numpy_nd_componentset():
             fib10=np.array([0, 1, 1, 2, 3, 5, 8, 13, 21, 34]),
             sin=np.sin(np.linspace(0, 2*np.pi, 100))),
         (10, 10, 100))
+
+
+@pytest.fixture
+def sample_numpy_parallelcomponentset():
+    '''
+    get a (ParallelComponentSet, shape) tuple
+    for a ComponentSet with multiple builtins
+    '''
+    return (
+        pj.ParallelComponentSet(
+            pcs1=np.arange(0, 10),
+            pcs2=np.arange(20, 30)),
+        (10, ))
 
 
 def test_constant(sample_py_constant):
@@ -154,7 +180,7 @@ def test_ndcomponentset(sample_py_nd_componentset):
         cs * cs  # cannot multiply ComponentSets by themselves
 
 
-def test_py_multiple_componentsets(
+def test_multiple_componentsets(
         sample_py_componentset, another_py_componentset):
 
     cs1, shape1 = sample_py_componentset
@@ -183,20 +209,23 @@ def test_complex_componentsets(
         sample_py_constant,
         another_py_constant,
         sample_py_componentset,
-        another_py_componentset):
+        another_py_componentset,
+        sample_py_parallelcomponentset):
 
     cons1, _ = sample_py_constant
     cons2, _ = another_py_constant
     cs1, shape1 = sample_py_componentset
     cs2, shape2 = another_py_componentset
+    pcs, shape3 = sample_py_parallelcomponentset
 
-    cplx = (cs1 + cs2) * cons1 + cons2 * (cs1 + cs2)
+    cplx = ((cs1 + cs2) * cons1 + cons2 * (cs1 + cs2)) * pcs
 
-    assert len(cplx) == 2 * (_product(shape1) + _product(shape2))
+    assert len(cplx) == 2 * (_product(shape1) +
+                             _product(shape2)) * _product(shape3)
 
-    assert cplx[1] == merge_dicts(cs1[1], cons1[0])
-    assert cplx[len(cs1) + 1] == merge_dicts(cs2[1], cons1[0])
-    assert cplx[-1] == merge_dicts(cs2[-1], cons2[0])
+    assert cplx[1] == merge_dicts(cs1[1], cons1[0], pcs[0])
+    assert cplx[len(cs1) + 1] == merge_dicts(cs1[1], cons1[0], pcs[1])
+    assert cplx[-1] == merge_dicts(cs2[-1], cons2[0], pcs[-1])
 
     full_cplx = list(cplx)
     assert len(full_cplx) == len(cplx)
@@ -204,75 +233,19 @@ def test_complex_componentsets(
 
 @requires_numpy
 def test_numpy_componentset(sample_numpy_componentset):
-    cs, shape = sample_numpy_componentset
-
-    assert len(cs) == shape[0]
-    assert len(cs[0]) == 1
-    assert len(cs) == len(list(cs))
-    assert cs[0] == cs[-len(cs)]
-
-    # requires sample_py_componentset to have unique first and last elements
-    assert cs[0] != cs[-1]
-
-    with pytest.raises(KeyError):
-        cs[shape[0]]
-
-    with pytest.raises(KeyError):
-        cs[-shape[0] - 1]
-
-    assert len(cs + cs) == shape[0] * 2
-
-    with pytest.raises(TypeError):
-        cs * cs  # cannot multiply ComponentSets by themselves
+    test_componentset(sample_numpy_componentset)
 
 
 @requires_numpy
 def test_numpy_ndcomponentset(sample_numpy_nd_componentset):
-    cs, shape = sample_numpy_nd_componentset
-
-    assert len(cs) == _product(shape)
-    assert len(cs[0]) == len(shape)
-    assert cs[0] == cs[-len(cs)]
-
-    # requires sample_py_componentset to have unique first and last elements
-    assert cs[0] != cs[-1]
-
-    with pytest.raises(KeyError):
-        cs[_product(shape)]
-
-    with pytest.raises(KeyError):
-        cs[-_product(shape) - 1]
-
-    assert len(cs + cs) == _product(shape) * 2
-
-    with pytest.raises(TypeError):
-        cs * cs  # cannot multiply ComponentSets by themselves
+    test_ndcomponentset(sample_numpy_nd_componentset)
 
 
 @requires_numpy
 def test_numpy_multiple_componentsets(
         sample_numpy_componentset, another_numpy_componentset):
-
-    cs1, shape1 = sample_numpy_componentset
-    cs2, shape2 = another_numpy_componentset
-
-    assert len(cs1 + cs2) == len(cs1) + len(cs2)
-    assert len(cs1 + cs2) == _product(shape1) + _product(shape2)
-
-    assert len(cs1 * cs2) == len(cs1) * len(cs2)
-    assert len(list(cs1 * cs2)) == len(cs1 * cs2)
-
-    assert (cs1 + cs2)[0] == cs1[0]
-    assert (cs1 + cs2)[1] == cs1[1]
-    assert (cs1 + cs2)[-2] == cs2[-2]
-    assert (cs1 + cs2)[-1] == cs2[-1]
-
-    assert (cs1 * cs2)[0] == merge_dicts(cs1[0], cs2[0])
-    assert (cs1 * cs2)[-1] == merge_dicts(cs1[-1], cs2[-1])
-
-    full_product = list(cs1 * cs2)
-    assert full_product[0] == (cs1 * cs2)[0]
-    assert full_product[-1] == (cs1 * cs2)[-1]
+    test_multiple_componentsets(
+        sample_numpy_componentset, another_numpy_componentset)
 
 
 @requires_numpy
@@ -280,23 +253,14 @@ def test_numpy_complex_componentsets(
         sample_py_constant,
         another_py_constant,
         sample_numpy_componentset,
-        another_numpy_componentset):
-
-    cons1, _ = sample_py_constant
-    cons2, _ = another_py_constant
-    cs1, shape1 = sample_numpy_componentset
-    cs2, shape2 = another_numpy_componentset
-
-    cplx = (cs1 + cs2) * cons1 + cons2 * (cs1 + cs2)
-
-    assert len(cplx) == 2 * (_product(shape1) + _product(shape2))
-
-    assert cplx[1] == merge_dicts(cs1[1], cons1[0])
-    assert cplx[len(cs1) + 1] == merge_dicts(cs2[1], cons1[0])
-    assert cplx[-1] == merge_dicts(cs2[-1], cons2[0])
-
-    full_cplx = list(cplx)
-    assert len(full_cplx) == len(cplx)
+        another_numpy_componentset,
+        sample_numpy_parallelcomponentset):
+    test_complex_componentsets(
+        sample_py_constant,
+        another_py_constant,
+        sample_numpy_componentset,
+        another_numpy_componentset,
+        sample_numpy_parallelcomponentset)
 
 
 def test_reprs(

@@ -25,8 +25,8 @@ Parameterize Jobs
 Features
 --------
 
-* Expand a job's dimensionality by multiplying ``ComponentSet`` or ``Constant`` objects
-* Extend the number of jobs by adding ``ComponentSet`` or ``Constant`` objects
+* Expand a job's dimensionality by multiplying ``ComponentSet``, ``Constant``, or ``ParallelComponentSet`` objects
+* Extend the number of jobs by adding ``ComponentSet``, ``Constant``, or ``ParallelComponentSet`` objects
 * Jobs are provided to functions as dictionaries of parameters
 * The helper decorator ``@expand_kwargs`` turns these kwarg dictionaries into
   named argument calls
@@ -151,6 +151,16 @@ A ``Constant`` object is simply a ``ComponentSet`` object defined with single va
 
     >>> list(map(my_simple_func, (ab1 + ab2) * c))
     [0, 0, 0, 5, -50, -55, 50, 55]
+
+A ``ParallelComponentSet`` object is simply a ``MultiComponentSet`` object where each ``Component`` is a ``Constant`` object.
+
+.. code-block:: python
+
+    >>> pcs = pjs.ParallelComponentSet(a = [1, 2],
+                               b = [10, 20])
+
+    >>> list(map(my_simple_func, pcs))
+    [10, 40]
 
 Arbitrarily complex combinations of ComponentSets can be created:
 
