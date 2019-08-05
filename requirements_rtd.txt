@@ -1,4 +1,4 @@
 -r requirements.txt
 -r requirements_dev.txt
 -r requirements_conda.txt
-ipython==7.4.0
+ipython==7.7.0
