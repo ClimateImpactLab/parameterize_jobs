@@ -45,10 +45,10 @@ class ComponentSet(object):
 
     def __getitem__(self, idx):
         if isinstance(idx, dict):
-            raise NotImplemented('dictionary indexing not yet supported')
+            raise NotImplementedError('dictionary indexing not yet supported')
 
         elif isinstance(idx, slice):
-            raise NotImplemented('slice indexing not yet supported')
+            raise NotImplementedError('slice indexing not yet supported')
 
         elif isinstance(idx, int):
 
@@ -70,7 +70,7 @@ class ComponentSet(object):
                 for i, k in enumerate(self._sets.keys())}
 
         else:
-            raise NotImplemented(
+            raise NotImplementedError(
                 '{} indexing not yet supported'.format(type(idx)))
 
     def __len__(self):
