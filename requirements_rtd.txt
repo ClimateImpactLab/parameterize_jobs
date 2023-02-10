@@ -1,4 +1,4 @@
 -r requirements.txt
 -r requirements_dev.txt
 -r requirements_conda.txt
-ipython==7.16.3
+ipython==8.10.0
