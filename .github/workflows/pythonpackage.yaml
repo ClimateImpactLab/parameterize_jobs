@@ -35,7 +35,7 @@ jobs:
           pip install -r requirements_dev.txt
       - name: Install package
         run: |
-          pip install .
+          pip install . --no-deps
       - name: Format check with flake8
         run: |
           flake8
