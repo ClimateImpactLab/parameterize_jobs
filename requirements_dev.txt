@@ -3,7 +3,7 @@ flake8==3.7.8
 tox==4.6.4
 Sphinx==1.8.3
 pytest>=6.5.2
-pytest-cov==2.7.1
+pytest-cov==4.1.0
 pytest-runner==6.0.0
 setuptools>=42
 build
