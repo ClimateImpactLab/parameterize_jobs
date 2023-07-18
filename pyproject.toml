@@ -37,4 +37,4 @@ source = "vcs"
 fallback-version = "999"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "parameterize_jobs/_version.py"
+version-file = "src/parameterize_jobs/_version.py"
