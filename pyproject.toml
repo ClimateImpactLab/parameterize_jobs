@@ -24,7 +24,7 @@ classifiers = [
 
 [project.optional-dependencies]
 test = [
-    "flake8",
+    "ruff",
     "pytest",
     "pytest-cov",
 ]
@@ -42,3 +42,22 @@ fallback-version = "999"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/parameterize_jobs/_version.py"
+
+[tool.ruff]
+exclude = [
+    ".eggs",
+    "docs",
+]
+# E402: module level import not at top of file
+ignore = [
+    "E402",
+]
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # Pyupgrade
+    "UP",
+]

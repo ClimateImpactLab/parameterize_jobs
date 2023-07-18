@@ -36,9 +36,9 @@ jobs:
       - name: Install package
         run: |
           pip install . --no-deps
-      - name: Format check with flake8
+      - name: Format check with ruff
         run: |
-          flake8
+          ruff check .
       - name: Test with pytest
         run: |
           pytest -v --cov parameterize_jobs --cov-report term-missing --cov-report xml
