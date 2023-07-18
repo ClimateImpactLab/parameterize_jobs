@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "parameterize_jobs"
+authors = [
+    { name="Michael Delgado", email="delgado.michaelt@gmail.com" },
+]
+description = "Concisely and clearly create large, parameterized, mapped job specifications"
+readme = "README.rst"
+dynamic = ["version"]
+requires-python = ">=3.9"
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ClimateImpactLab/parameterize_jobs"
+"Bug Tracker" = "https://github.com/ClimateImpactLab/parameterize_jobs/issues"
+
+[project.optional-dependencies]
+test = [
+    "flake8",
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov=parameterize_jobs --doctest-modules --cov-report term-missing"
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "999"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "parameterize_jobs/_version.py"
