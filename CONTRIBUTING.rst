@@ -101,9 +101,9 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.6, 2.7, 3.3, 3.4 and 3.5, and for PyPy. Check
-   https://travis-ci.org/ClimateImpactLab/parameterize_jobs/pull_requests
-   and make sure that the tests pass for all supported Python versions.
+3. The pull request should work on recent versions of Python 3. Check the 
+   automated tests run as part of your pull request to ensure all tests
+   are passing.
 
 Tips
 ----
