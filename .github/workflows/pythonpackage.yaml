@@ -29,10 +29,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-          cache-dependency-path: 'requirements_dev.txt'
+          cache-dependency-path: 'requirements.txt'
       - name: Install dependencies
         run: |
-          pip install -r requirements_dev.txt
+          pip install -r requirements.txt
       - name: Install package
         run: |
           pip install . --no-deps
