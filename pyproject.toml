@@ -34,7 +34,7 @@ testpaths = [
     "src",
     "tests",
 ]
-addopts = "--cov=parameterize_jobs --doctest-modules --cov-report term-missing"
+addopts = "--cov=parameterize_jobs --doctest-modules"
 
 [tool.hatch.version]
 source = "vcs"
