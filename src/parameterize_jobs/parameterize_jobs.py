@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
 
 import itertools
 import functools
@@ -10,7 +8,7 @@ import parameterize_jobs._compat as _compat
 from parameterize_jobs._utils import _product, _cumprod
 
 
-class Component(object):
+class Component:
     def __init__(self, values):
         if isinstance(values, Component):
             self._values = values._values
@@ -24,8 +22,7 @@ class Component(object):
         return len(self._values)
 
     def __iter__(self):
-        for v in self._values:
-            yield v
+        yield from self._values
 
     def __repr__(self):
         return '<{} [{}]>'.format(
@@ -34,7 +31,7 @@ class Component(object):
             + (', ...' if len(self) > 3 else ''))
 
 
-class ComponentSet(object):
+class ComponentSet:
     '''
     Indexable combinatorial product job specification
     '''
@@ -71,7 +68,7 @@ class ComponentSet(object):
 
         else:
             raise NotImplementedError(
-                '{} indexing not yet supported'.format(type(idx)))
+                f'{type(idx)} indexing not yet supported')
 
     def __len__(self):
         return _product(map(len, self._sets.values()))
@@ -89,7 +86,7 @@ class ComponentSet(object):
             return MultiComponentSet([self * c for c in other._components])
         else:
             raise TypeError(
-                'Cannot multiply {} by {}'.format(type(self), type(other)))
+                f'Cannot multiply {type(self)} by {type(other)}')
 
     def __add__(self, other):
         return MultiComponentSet([self, other])
@@ -114,12 +111,10 @@ class ComponentSet(object):
 
     def __repr__(self):
         return (
-            '<{} {}>'.format(
-                self.__class__.__name__,
-                self._stringify()))
+            f'<{self.__class__.__name__} {self._stringify()}>')
 
 
-class MultiComponentSet(object):
+class MultiComponentSet:
     '''
     A list of multiple ComponentSet objects
     '''
@@ -169,9 +164,7 @@ class MultiComponentSet(object):
 
     def __repr__(self):
         return (
-            '<{} {}>'.format(
-                self.__class__.__name__,
-                self._stringify()))
+            f'<{self.__class__.__name__} {self._stringify()}>')
 
 
 class Constant(ComponentSet):
