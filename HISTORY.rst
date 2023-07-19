@@ -5,6 +5,10 @@ History
 Unreleased
 ----------
 
+* Drop Python 2 support.
+* Minor updates to package metadata.
+* Simplify package maintainence and tooling. `tox` removed. `flake8` replaced for `ruff`. Testing now just `ruff` and `pytest`.
+* Switch from setup.py to pyproject.toml with hatchling for builds and an /src layout.
 * Remove Travis CI integration and configurations in favor of Github Actions.
 
 

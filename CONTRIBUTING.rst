@@ -76,13 +76,12 @@ Ready to contribute? Here's how to set up `parameterize_jobs` for local developm
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass flake8 and the tests, including testing other Python versions with tox::
+5. When you're done making changes, check that your changes pass ruff and the tests::
 
-    $ flake8 parameterize_jobs tests
-    $ python setup.py test or pytest
-    $ tox
+    $ ruff check .
+    $ pytest
 
-   To get flake8 and tox, just pip install them into your virtualenv.
+   To get ruff and pytest, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub::
 
