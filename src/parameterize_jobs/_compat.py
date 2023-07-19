@@ -8,6 +8,6 @@ def merge_dicts(*dicts):
     for d in dicts:
         for k in d.keys():
             if k in res:
-                raise TypeError('multiple instances of key {}'.format(k))
+                raise TypeError(f'multiple instances of key {k}')
         res.update(d)
     return res

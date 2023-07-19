@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 
 """Top-level package for Parameterize Jobs."""
 
-from __future__ import absolute_import
 
 from parameterize_jobs.parameterize_jobs import (
     Component,
