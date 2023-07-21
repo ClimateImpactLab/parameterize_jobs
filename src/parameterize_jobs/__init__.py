@@ -1,7 +1,7 @@
 
 """Top-level package for Parameterize Jobs."""
 
-
+from parameterize_jobs._version import version as __version__
 from parameterize_jobs.parameterize_jobs import (
     Component,
     ComponentSet,
