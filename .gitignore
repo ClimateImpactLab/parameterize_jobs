@@ -44,6 +44,7 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
+.ruff_cache/
 
 # Translations
 *.mo
@@ -61,6 +62,7 @@ target/
 # pyenv python configuration file
 .python-version
 
-
 # pytest cache
 .pytest_cache
+
+src/parameterize_jobs/_version.py
