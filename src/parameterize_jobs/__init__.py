@@ -1,7 +1,7 @@
 
 """Top-level package for Parameterize Jobs."""
 
-from parameterize_jobs._version import version
+from parameterize_jobs._version import __version__  # noqa: F401
 from parameterize_jobs.parameterize_jobs import (
     Component,
     ComponentSet,
@@ -12,7 +12,6 @@ from parameterize_jobs.parameterize_jobs import (
 
 __author__ = """Michael Delgado"""
 __email__ = 'delgado.michaelt@gmail.com'
-__version__ = version
 
 _module_imports = (
     Component,
