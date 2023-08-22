@@ -24,6 +24,7 @@ classifiers = [
 
 [project.optional-dependencies]
 docs = [
+    "ipython",
     "Sphinx",
     "sphinx-rtd-theme",
 ]
