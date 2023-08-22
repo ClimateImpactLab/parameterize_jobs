@@ -23,6 +23,10 @@ classifiers = [
 "Bug Tracker" = "https://github.com/ClimateImpactLab/parameterize_jobs/issues"
 
 [project.optional-dependencies]
+docs = [
+    "Sphinx",
+    "sphinx-rtd-theme",
+]
 test = [
     "ruff",
     "pytest",

@@ -51,8 +51,8 @@ extensions = [
     'IPython.sphinxext.ipython_directive']
 
 extlinks = {
-    'issue': ('https://github.com/ClimateImpactLab/parameterize_jobs/issues/%s', 'GH #'),
-    'pull': ('https://github.com/ClimateImpactLab/parameterize_jobs/pull/%s', 'PR #')}
+    'issue': ('https://github.com/ClimateImpactLab/parameterize_jobs/issues/%s', 'GH #%s'),
+    'pull': ('https://github.com/ClimateImpactLab/parameterize_jobs/pull/%s', 'PR #%s')}
 
 napoleon_numpy_docstring = True
 
@@ -291,5 +291,5 @@ texinfo_documents = [
 
 
 intersphinx_mapping = {
-    'python': ('https://docs.python.org/2.7', None)
+    'python': ('https://docs.python.org/3', None)
 }
