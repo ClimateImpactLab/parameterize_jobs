@@ -2,8 +2,8 @@
 History
 =======
 
-Unreleased
-----------
+0.2.0 (2023-09-01)
+------------------
 
 * Drop Python 2 support.
 * Minor updates to package metadata.
