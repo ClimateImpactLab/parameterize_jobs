@@ -130,8 +130,7 @@ class MultiComponentSet:
 
     def __iter__(self):
         for c in self._components:
-            for s in c:
-                yield s
+            yield from c
 
     def __len__(self):
         return sum([len(c) for c in self._components])
