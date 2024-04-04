@@ -50,9 +50,10 @@ class ComponentSet:
         elif isinstance(idx, int):
 
             if (idx >= len(self)) or (idx < -1 * len(self)):
+                name = self.__class__.__name__
+                n = len(self)
                 raise KeyError(
-                    'index {} out of bounds for {} with length {}'
-                    .format(idx, self.__class__.__name__, len(self)))
+                    f'index {idx} out of bounds for {name} with length {n}')
 
             lens = list(map(len, self._sets.values()))
             cplens = list(_cumprod(list(
@@ -137,9 +138,10 @@ class MultiComponentSet:
 
     def __getitem__(self, idx):
         if (idx >= len(self)) or (idx < -1 * len(self)):
+            name = self.__class__.__name__
+            n = len(self)
             raise KeyError(
-                'index {} out of bounds for {} with length {}'
-                .format(idx, self.__class__.__name__, len(self)))
+                f'index {idx} out of bounds for {name} with length {n}')
 
         idx = idx % len(self)
 

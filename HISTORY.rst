@@ -6,7 +6,7 @@ History
 Unreleased
 ----------
 
-*
+* Minor code format cleanup, ruff config update.
 
 
 0.2.0 (2023-09-01)
