@@ -34,7 +34,7 @@ jobs:
           pip install -r requirements.txt
       - name: Format check with ruff
         run: |
-          ruff check .
+          ruff check . --diff
 
   test:
     runs-on: ubuntu-latest
