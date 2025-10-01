@@ -1,5 +1,5 @@
 # These are just used for Github and CI.
 numpy==2.2.3
-pytest==8.4.1
+pytest==8.4.2
 pytest-cov==6.2.1
 ruff==0.12.11
